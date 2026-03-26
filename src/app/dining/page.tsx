@@ -2,6 +2,30 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useState } from 'react';
+
+const ImageWithFallback = ({ src, alt, className, ...props }: { src: string; alt: string; className?: string; [key: string]: any }) => {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  const handleError = () => {
+    if (!hasError) {
+      setHasError(true);
+      // Fallback to a placeholder
+      setImgSrc(`https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(alt)}`);
+    }
+  };
+
+  return (
+    <img
+      src={imgSrc}
+      alt={alt}
+      className={className}
+      onError={handleError}
+      {...props}
+    />
+  );
+};
 
 export default function Dining() {
   const restaurants = [
@@ -10,7 +34,7 @@ export default function Dining() {
       cuisine: "French Fine Dining",
       rating: "⭐⭐⭐⭐⭐ Michelin 2-Star",
       description: "Exquisite French cuisine prepared by our world-renowned executive chef",
-      image: "https://images.unsplash.com/photo-1504674900568-e75d26cad038?w=600&h=400&fit=crop",
+      image: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
       hours: "5:00 PM - 11:00 PM"
     },
     { 
@@ -18,7 +42,7 @@ export default function Dining() {
       cuisine: "International Contemporary",
       rating: "⭐⭐⭐⭐ Fine Casual",
       description: "Modern international cuisine with live entertainment and sophisticated ambiance",
-      image: "https://images.unsplash.com/photo-1552566626-7ee31b500f87?w=600&h=400&fit=crop",
+      image: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
       hours: "6:00 AM - 11:00 PM"
     },
     { 
@@ -26,7 +50,7 @@ export default function Dining() {
       cuisine: "Cocktails & Appetizers",
       rating: "⭐⭐⭐⭐ Tropical Paradise",
       description: "Craft cocktails and light bites with panoramic views of the infinity pool",
-      image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=400&fit=crop",
+      image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
       hours: "2:00 PM - Midnight"
     }
   ];
@@ -64,7 +88,7 @@ export default function Dining() {
             >
               {/* Image */}
               <div className="relative h-60 overflow-hidden bg-gray-200">
-                <img
+                <ImageWithFallback
                   src={restaurant.image}
                   alt={restaurant.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-500"

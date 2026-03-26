@@ -1,6 +1,30 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+
+const ImageWithFallback = ({ src, alt, className, ...props }: { src: string; alt: string; className?: string; [key: string]: any }) => {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  const handleError = () => {
+    if (!hasError) {
+      setHasError(true);
+      // Fallback to a placeholder
+      setImgSrc(`https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(alt)}`);
+    }
+  };
+
+  return (
+    <img
+      src={imgSrc}
+      alt={alt}
+      className={className}
+      onError={handleError}
+      {...props}
+    />
+  );
+};
 
 export default function Amenities() {
   const amenities = [
@@ -60,10 +84,10 @@ export default function Amenities() {
           <h2 className="text-4xl font-bold text-center mb-16 text-slate-900">Experience Our Facilities</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {[
-              { title: "Luxurious Spa", src: "https://images.unsplash.com/photo-1544161515-81205f8abecc?w=600&h=400&fit=crop" },
-              { title: "Modern Fitness", src: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop" },
-              { title: "Olympic Pool", src: "https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=600&h=400&fit=crop" },
-              { title: "Relaxation Area", src: "https://images.unsplash.com/photo-1540932239986-310128078caf?w=600&h=400&fit=crop" }
+              { title: "Luxurious Spa", src: "https://images.pexels.com/photos/3757946/pexels-photo-3757946.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" },
+              { title: "Modern Fitness", src: "https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" },
+              { title: "Olympic Pool", src: "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" },
+              { title: "Relaxation Area", src: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" }
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -73,7 +97,7 @@ export default function Amenities() {
                 whileHover={{ scale: 1.05 }}
                 className="relative h-80 rounded-xl overflow-hidden shadow-lg group"
               >
-                <img
+                <ImageWithFallback
                   src={item.src}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:brightness-75 transition duration-300"

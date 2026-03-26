@@ -2,7 +2,30 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useState } from 'react';
+
+const ImageWithFallback = ({ src, alt, className, ...props }: { src: string; alt: string; className?: string; [key: string]: any }) => {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  const handleError = () => {
+    if (!hasError) {
+      setHasError(true);
+      // Fallback to a placeholder
+      setImgSrc(`https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(alt)}`);
+    }
+  };
+
+  return (
+    <img
+      src={imgSrc}
+      alt={alt}
+      className={className}
+      onError={handleError}
+      {...props}
+    />
+  );
+};
 
 export default function Home() {
   return (
@@ -103,12 +126,12 @@ export default function Home() {
           </motion.h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Luxury Suite", src: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&h=500&fit=crop" },
-              { title: "Restaurant", src: "https://images.unsplash.com/photo-1552566626-7ee31b500f87?w=500&h=500&fit=crop" },
-              { title: "Spa Relaxation", src: "https://images.unsplash.com/photo-1544161515-81205f8abecc?w=500&h=500&fit=crop" },
-              { title: "Pool Area", src: "https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=500&h=500&fit=crop" },
-              { title: "Lobby", src: "https://images.unsplash.com/photo-1578751518677-feadb594f300?w=500&h=500&fit=crop" },
-              { title: "Conference Room", src: "https://images.unsplash.com/photo-1696147391851-b717e6e0fc99?w=500&h=500&fit=crop" }
+              { title: "Luxury Suite", src: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" },
+              { title: "Restaurant", src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" },
+              { title: "Spa Relaxation", src: "https://images.pexels.com/photos/3757946/pexels-photo-3757946.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" },
+              { title: "Pool Area", src: "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" },
+              { title: "Lobby", src: "https://images.pexels.com/photos/1579253/pexels-photo-1579253.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" },
+              { title: "Conference Room", src: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" }
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -118,7 +141,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 className="relative h-64 rounded-lg overflow-hidden shadow-lg cursor-pointer group"
               >
-                <img
+                <ImageWithFallback
                   src={item.src}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:brightness-75 transition duration-300"

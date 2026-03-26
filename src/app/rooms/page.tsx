@@ -2,6 +2,30 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useState } from 'react';
+
+const ImageWithFallback = ({ src, alt, className, ...props }: { src: string; alt: string; className?: string; [key: string]: any }) => {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  const handleError = () => {
+    if (!hasError) {
+      setHasError(true);
+      // Fallback to a placeholder
+      setImgSrc(`https://via.placeholder.com/600x400/6366f1/ffffff?text=${encodeURIComponent(alt)}`);
+    }
+  };
+
+  return (
+    <img
+      src={imgSrc}
+      alt={alt}
+      className={className}
+      onError={handleError}
+      {...props}
+    />
+  );
+};
 
 export default function Rooms() {
   const rooms = [
@@ -10,7 +34,7 @@ export default function Rooms() {
       price: "$149",
       night: "/night",
       features: ["Comfortable double bed", "Modern ensuite bathroom", "High-speed WiFi", "Flat-screen TV", "Mini fridge & coffee maker"],
-      image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=700&h=500&fit=crop",
+      image: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop",
       rating: "⭐⭐⭐⭐"
     },
     { 
@@ -18,7 +42,7 @@ export default function Rooms() {
       price: "$249",
       night: "/night",
       features: ["Premium queen bed", "Work desk & ergonomic chair", "Marble bathroom", "Bathrobe & slippers", "Premium toiletries"],
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=700&h=500&fit=crop",
+      image: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop",
       rating: "⭐⭐⭐⭐⭐",
       featured: false
     },
@@ -27,7 +51,7 @@ export default function Rooms() {
       price: "$399",
       night: "/night",
       features: ["King bed & living area", "Panoramic city views", "Luxury spa bath", "Personal concierge", "Premium minibar & more"],
-      image: "https://images.unsplash.com/photo-1578751518677-feadb594f300?w=700&h=500&fit=crop",
+      image: "https://images.pexels.com/photos/1579253/pexels-photo-1579253.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop",
       rating: "⭐⭐⭐⭐⭐",
       featured: true
     }
@@ -68,7 +92,7 @@ export default function Rooms() {
             >
               {/* Image */}
               <div className="relative h-64 overflow-hidden bg-gray-200">
-                <img
+                <ImageWithFallback
                   src={room.image}
                   alt={room.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
