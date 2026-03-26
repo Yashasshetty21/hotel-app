@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Luxe Hotel - 5 Star Luxury Web Application
+
+A modern, responsive 5-star hotel website built with Next.js, featuring smooth animations, multiple pages, and a professional design using Tailwind CSS.
+
+## Features
+
+- **Home Page**: Hero section with booking CTA and feature highlights
+- **Rooms Page**: Showcase of different room types with pricing and features
+- **Dining Page**: Multiple restaurants and dining experiences
+- **Amenities Page**: Complete list of hotel amenities and services
+- **Contact Page**: Contact form and hotel information
+- **Booking Page**: Advanced booking form with date and guest selection
+- **Smooth Animations**: All pages feature smooth transitions using Framer Motion
+- **Responsive Design**: Mobile-friendly layout using Tailwind CSS
+- **Modern UI**: Clean, luxurious design with gold accents
+
+## Tech Stack
+
+- **Framework**: Next.js 16.2.1 with TypeScript
+- **Styling**: Tailwind CSS 4
+- **Animations**: Framer Motion
+- **Development**: ESLint, Turbopack
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ installed
+- npm or yarn package manager
+
+### Installation
+
+From the `hotel-app` directory:
+
+```bash
+npm install
+```
+
+### Development Server
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create an optimized production build:
+
+```bash
+npm run build
+```
+
+### Run Production Build
+
+Start the production server:
+
+```bash
+npm start
+```
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── layout.tsx         # Root layout with header
+│   ├── page.tsx           # Home page with hero and features
+│   ├── globals.css        # Global styles and Tailwind config
+│   ├── rooms/
+│   │   └── page.tsx       # Rooms showcase page
+│   ├── dining/
+│   │   └── page.tsx       # Dining experiences page
+│   ├── amenities/
+│   │   └── page.tsx       # Hotel amenities page
+│   ├── contact/
+│   │   └── page.tsx       # Contact form page
+│   └── booking/
+│       └── page.tsx       # Booking form page
+└── components/
+    └── Header.tsx         # Navigation header component
+```
+
+## Navigation
+
+- **Home**: `/`
+- **Rooms**: `/rooms`
+- **Dining**: `/dining`
+- **Amenities**: `/amenities`
+- **Contact**: `/contact`
+- **Booking**: `/booking`
+
+## Customization
+
+### Colors
+
+To customize the gold color scheme, edit `src/app/globals.css`:
+
+```css
+--color-gold-500: #d4af37;
+--color-gold-600: #b8860b;
+```
+
+### Content
+
+All page content can be easily modified in their respective `page.tsx` files in the `src/app` directory.
+
+### Images
+
+Replace placeholder image paths in components with actual image assets in the `public/` directory.
+
+## Performance
+
+- Static site generation for all pages
+- Optimized images with Next.js Image component
+- Minified CSS and JavaScript
+- Fast refresh during development with Turbopack
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Framer Motion Documentation](https://www.framer.com/motion/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is open source and available under the MIT License.
 
-## Deploy on Vercel
+## Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Created with Next.js and modern web technologies for a luxury hotel experience.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

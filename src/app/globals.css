@@ -10,6 +10,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-gold-400: #feed7d;
+  --color-gold-500: #d4af37;
+  --color-gold-600: #b8860b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +22,39 @@
   }
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8860b;
+}
+
+/* Smooth transitions */
+a {
+  transition: all 0.3s ease;
+}
+
+button {
+  transition: all 0.3s ease;
 }
